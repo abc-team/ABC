@@ -1,0 +1,19 @@
+{
+  "author": "taobao-abc-team",
+  "name": "abcenter",
+  "description": "assets build center",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:abc-team/ABC.git"
+  },
+  "main": "abc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "assets",
+    "build"
+  ],
+  "license": "BSD"
+}
