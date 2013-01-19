@@ -12,12 +12,15 @@
 	{
 		"config" : {
 			"[task-type]" : {
-				"[taskname]" : {
+				"<taskname>" : {
 					"[task-property-name]" : "[task-property-value]"
 				}
 			}
 		},
-		"tasks" : ["[task-type]","[task-type]:[taskname]"]
+		"tasks" : {
+			"default" : ["[task-type[:taskname]]"],
+			"<taskname>" : ["[task-type[:taskname]]"]
+		}
 	}
 
 ````
@@ -212,6 +215,10 @@ engine :    [String]
     "a" : {
         "src" : ["**/*"],
         "dest" : "{{path}}/{{filename}}-min.{{extname}}"
+    },
+    "b" : {
+	"src" : [*.combo.js],
+	"dest" : "{{$0}}-min.js"
     }
 }
 ````
