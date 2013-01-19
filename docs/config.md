@@ -1,13 +1,14 @@
-### abc[.taskname].json
+## 命名
+- abc[.taskname].json
 
-说明：
+
+## 说明
 * 配置打包信息
 * 可放在任意目录下，命名可以是：abc.json（默认按此配置执行），abc.project1.json(在命令行指定参数来执行)
 
 
-## abc[.taskname].json配置说明
-
-#### 格式：
+## 格式：
+````
 	{
 		"config" : {
 			"[task-type]" : {
@@ -18,6 +19,11 @@
 		},
 		"tasks" : ["[task-type]","[task-type]:[taskname]"]
 	}
+
+````
+
+
+## 参数说明
 
 #### [task-type]：
 
@@ -158,7 +164,7 @@ engine :    [String]
             //html to template转换时用到的模板引擎，如"kissy","kissyX"
 ````
 
-### [Path]
+#### [Path]
 
 ##### 匹配规则：
 
@@ -183,6 +189,7 @@ engine :    [String]
 {{filename}}	//匹配到的文件名
 {{extname}}		//匹配到的文件类型
 {{path}}		//匹配到的文件路径（相对路径）
+{{$[n]}}	//匹配到的第n个*值
 ````
 
 
