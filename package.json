@@ -1,11 +1,15 @@
 {
-  "author": "taobao-abc-team",
   "name": "abcenter",
-  "description": "assets build center",
   "version": "0.0.0",
+  "author": "taobao-abc-team",
+  "description": "assets build center",
+  "contributors": ["frontwindysky<frontwindysky@gmail.com>"],
   "repository": {
     "type": "git",
-    "url": "git@github.com:abc-team/ABC.git"
+    "url": "git://github.com/abc-team/ABC.git"
+  },
+  "bin": {
+    "abc": "./bin/abc.js"
   },
   "main": "abc.js",
   "scripts": {
@@ -13,7 +17,8 @@
   },
   "keywords": [
     "assets",
-    "build"
+    "build",
+    "web develop"
   ],
   "license": "BSD"
 }
