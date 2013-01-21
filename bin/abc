@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+var spawn = require('child_process').spawn;
+
+//console.log(process.argv);
+
+var script = 'require("abc").cli(' + JSON.stringify(process.argv)+ ');';
+
+console.log(script);
+
+var abcCli = spawn('node',['-e', script], {
+    cwd: process.cwd(),
+    env: process.env
+});
+
+abcCli.stdout.pipe(process.stdout);
+abcCli.stderr.pipe(process.stderr);
+
+abcCli.on('exit', function(code, signal){
+    process.exit(code);
+});

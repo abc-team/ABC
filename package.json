@@ -3,15 +3,17 @@
   "version": "0.0.0",
   "author": "taobao-abc-team",
   "description": "assets build center",
-  "contributors": ["frontwindysky<frontwindysky@gmail.com>"],
+  "contributors": [
+    "frontwindysky<frontwindysky@gmail.com>"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/abc-team/ABC.git"
   },
   "bin": {
-    "abc": "./bin/abc.js"
+    "abc": "bin/abc"
   },
-  "main": "abc.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,5 +22,8 @@
     "build",
     "web develop"
   ],
-  "license": "BSD"
+  "license": "BSD",
+  "dependencies": {
+    "underscore": "~1.4.3"
+  }
 }
