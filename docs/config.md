@@ -10,6 +10,9 @@
 ## 格式：
 ````
 	{
+		"var" : {
+			"<variablename>" : "<value>"
+		},
 		"config" : {
 			"[task-type]" : {
 				"<taskname>" : {
@@ -27,6 +30,13 @@
 
 
 ## 参数说明
+
+````
+* var 			//定义公共变量；
+* config		//打包任务的配置信息；
+* tasks			//定义任务队列，默认执行default任务集
+````
+
 
 #### [task-type]：
 
@@ -46,7 +56,6 @@ coffee      //coffee编译
 htt         //html to template
 exec        //执行外部命令
 include     //外联任务
-var         //自定义变量
 ````
 
 
@@ -284,7 +293,7 @@ engine :    [String]
             }
         }
    },
-   "tasks" : ["include:a","concat:a","min:b","exec:git"]
+   "tasks" : {"default" : ["include:a","concat:a","min:b","exec:git"]}
 }
 ````
 
