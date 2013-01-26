@@ -15,7 +15,7 @@
   },
   "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node_modules/mocha/bin/mocha"
   },
   "keywords": [
     "assets",
@@ -25,5 +25,9 @@
   "license": "BSD",
   "dependencies": {
     "underscore": "~1.4.3"
+  },
+  "devDependencies": {
+    "mocha": "~1.8.1",
+    "should": "~1.2.1"
   }
 }
