@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 var spawn = require('child_process').spawn;
 
-//µ÷ÓÃ±¾µØ°²×°µÄ abc
+//è°ƒç”¨æœ¬åœ°å®‰è£…çš„ abc
 var script = 'require("abc").cli(' + JSON.stringify(process.argv)+ ');';
 
 var abcCli = spawn('node',['-e', script], {
