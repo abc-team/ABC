@@ -2,7 +2,7 @@
 var spawn = require('child_process').spawn;
 
 //调用本地安装的 abc
-var script = 'require("abc").cli(' + JSON.stringify(process.argv)+ ');';
+var script = 'require("abcenter").cli(' + JSON.stringify(process.argv)+ ');';
 
 var abcCli = spawn('node',['-e', script], {
     cwd: process.cwd(),
