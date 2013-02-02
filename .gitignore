@@ -9,3 +9,6 @@ desktop.ini
 .dropbox.cache/
 .svn/
 .idea/
+
+node_modules/
+jsmine/
