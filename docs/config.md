@@ -9,22 +9,25 @@
 
 ## 格式：
 ````
-	{
-		"var" : {
-			"<variablename>" : "<value>"
-		},
-		"config" : {
-			"[task-type]" : {
-				"<taskname>" : {
-					"[task-property-name]" : "[task-property-value]"
-				}
+{
+	"var" : {
+		"<variablename>" : "<value>"
+	},
+	"plugins": {
+		"<pluginName>": "<pluginPath>"
+	},
+	"config" : {
+		"[task-type]" : {
+			"<taskname>" : {
+				"[task-property-name]" : "[task-property-value]"
 			}
-		},
-		"tasks" : {
-			"default" : ["[task-type[:taskname]]"],
-			"<taskname>" : ["[task-type[:taskname]]"]
 		}
+	},
+	"tasks" : {
+		"default" : ["[task-type[:taskname]]"],
+		"<taskname>" : ["[task-type[:taskname]]"]
 	}
+}
 
 ````
 
