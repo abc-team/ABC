@@ -60,4 +60,34 @@ describe("Utils Embed Object", function(){
         });
 
     });
+
+    describe('对象循环引用', function(){
+        var result;
+        before(function(){
+            var foo = {};
+
+            var bar = {
+                foo: foo,
+                ok: 'ok'
+            };
+
+            foo.bar = bar;
+
+            result = embObj({
+                r: foo
+            });
+        });
+
+        it('使循环的变量为空', function () {
+            result.should.eql({
+                r: {
+                    bar: {
+                        foo: null,
+                        ok: 'ok'
+                    }
+                }
+            })
+        });
+
+    });
 });
