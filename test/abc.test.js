@@ -11,11 +11,13 @@ describe("ABC Test", function(){
             q.should.eql([
                 {
                     type: 'concat',
-                    name:'a'
+                    name:'a',
+                    source: 'concat:a'
                 },
                 {
                     type: 'kmc',
-                    name: 'b'
+                    name: 'b',
+                    source: 'kmc:b'
                 }
             ], 'normal queue');
         });
@@ -25,11 +27,13 @@ describe("ABC Test", function(){
             q.should.eql([
                 {
                     type: 'foo',
-                    name:'bar'
+                    name:'bar',
+                    source: "foo:bar"
                 },
                 {
                     type: 'bar',
-                    name:'foo'
+                    name:'foo',
+                    source: 'bar:foo'
                 }
             ], 'no illegal task concat');
         });
@@ -38,8 +42,34 @@ describe("ABC Test", function(){
             var q = parseQueue(['foo:bar', 'concat']);
             q.should.eql([{
                 type: 'foo',
-                name:'bar'
+                name:'bar',
+                source: 'foo:bar'
             }], 'no illegal task concat');
         });
+    });
+
+    describe('new ABC', function() {
+        var abc = new ABC({
+            vars: {
+                foo: 'bar',
+                n: 10085
+            },
+            config: {
+                console: {
+                    start: {
+                        messages: [
+                            'log:xxx{foo}',
+                            'log:yyy{n}'
+                        ]
+                    }
+
+                }
+            },
+            tasks: {
+                default: ['console:start']
+            }
+        });
+
+
     });
 });
