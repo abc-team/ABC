@@ -1,0 +1,44 @@
+#!/usr/bin/env node
+/**
+ * @description 命令行参数解析：使用readline，
+ * 支持Ctrl-a
+ *     Ctrl-e
+ *     Ctrl-b
+ *     Ctrl-k
+ * 键盘快捷键操作
+ * */
+var optimist = require('optimist')
+  , readline = require('readline')
+  , rl = readline.createInterface(process.stdin, process.stdout)
+rl.setPrompt('abc> ');
+rl.prompt();
+
+rl.on('line', function(line) {
+  var argv = line.replace(/\s{2,}/g," ").split(' ')
+    , raw
+    , cmd
+  argv = optimist.parse(argv)
+  raw = argv._
+  cmd = raw[0]
+  switch(cmd) {
+    case 'init':
+    console.log('init...');
+    break;
+    case 'build':
+    console.log('building...');
+    break;
+    case "exit":
+    case "quit":
+    rl.close();
+    break;
+  }
+  rl.prompt();
+}).on('close', function() {
+  console.log('abc> bye!');
+  process.exit(0);
+});
+
+/**
+ * note:
+ * 尝试用readline来做命令行界面
+ * */
