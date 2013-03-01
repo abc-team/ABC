@@ -3,7 +3,7 @@ require('should');
 
 describe("ABC Test", function(){
 
-    describe("test parseQueue", function(){
+    describe("test parseQueue", function() {
         var parseQueue = ABC.prototype._parseTask;
 
         it('should parse array of string into array of parsed task', function () {
@@ -55,7 +55,7 @@ describe("ABC Test", function(){
                 n: 10085
             },
             config: {
-                console: {
+                log: {
                     start: {
                         messages: [
                             'log:xxx{foo}',
@@ -66,7 +66,7 @@ describe("ABC Test", function(){
                 }
             },
             tasks: {
-                default: ['console:start']
+                default: ['log:start']
             }
         });
 

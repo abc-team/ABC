@@ -34,7 +34,7 @@ describe("PluginManager Test", function(){
         var pm;
         var abcObj = {};
         var initConfig = {};
-        var p1 = '../lib/plugins/log/log';
+        var p1 = '../lib/plugins/log/index';
 
         before(function() {
             pm = new plugin.PluginManager(abcObj);
