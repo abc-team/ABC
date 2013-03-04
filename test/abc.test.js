@@ -4,7 +4,7 @@ require('should');
 describe("ABC Test", function(){
 
     describe("test parseQueue", function() {
-        var parseQueue = ABC.prototype._parseTask;
+        var parseQueue = ABC.prototype._parseQueue;
 
         it('should parse array of string into array of parsed task', function () {
             var q = parseQueue(['concat:a', 'kmc:b']);
