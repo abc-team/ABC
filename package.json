@@ -4,16 +4,14 @@
   "author": "taobao-abc-team",
   "description": "assets build center",
   "contributors": [
-    "frontwindysky<frontwindysky@gmail.com>",
-    "maxbbn<qipbbn@gmail.com>"
+    "frontwindysky<frontwindysky@gmail.com>"
   ],
   "repository": {
     "type": "git",
     "url": "git://github.com/abc-team/ABC.git"
   },
   "bin": {
-    "abc": "bin/abc",
-		"abcenter":"bin/abcenter"
+    "abcenter":"bin/abcenter"
   },
   "main": "lib/index.js",
   "scripts": {
@@ -33,7 +31,6 @@
   },
   "devDependencies": {
     "mocha": "~1.8.1",
-    "should": "~1.2.1",
-    "abc-plugin-log": ">=0.0.0"
+    "should": "~1.2.1"
   }
 }
