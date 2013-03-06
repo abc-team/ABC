@@ -1,75 +1,84 @@
 var ABC = require('../lib/abc');
+var Task = require('../lib/task');
 require('should');
 
 describe("ABC Test", function(){
+    var abc;
 
-    describe("test parseQueue", function() {
-        var parseQueue = ABC.prototype._parseQueue;
+    before(function(){
+        abc = new ABC({
 
-        it('should parse array of string into array of parsed task', function () {
-            var q = parseQueue(['concat:a', 'kmc:b']);
-            q.should.eql([
-                {
-                    type: 'concat',
-                    name:'a',
-                    source: 'concat:a'
-                },
-                {
-                    type: 'kmc',
-                    name: 'b',
-                    source: 'kmc:b'
+            vars: {
+                foo: 'bar'
+            },
+
+            configs: {
+                log: {
+                    start: {
+                        message: "Welcom to xxx"
+                    },
+                    end: {
+                        message: "Welcom to {{foo}}"
+                    }
                 }
-            ], 'normal queue');
-        });
+            },
 
-        it('should ignore illegal task', function () {
-            var q = parseQueue(['foo:bar', 'concat', 'bar:foo']);
-            q.should.eql([
-                {
-                    type: 'foo',
-                    name:'bar',
-                    source: "foo:bar"
-                },
-                {
-                    type: 'bar',
-                    name:'foo',
-                    source: 'bar:foo'
-                }
-            ], 'no illegal task concat');
-        });
-
-        it('should ignore illegal task', function () {
-            var q = parseQueue(['foo:bar', 'concat']);
-            q.should.eql([{
-                type: 'foo',
-                name:'bar',
-                source: 'foo:bar'
-            }], 'no illegal task concat');
+            tasks: {
+                "default": ['log:start','log:end']
+            }
         });
     });
 
-    describe('new ABC', function() {
-        var abc = new ABC({
-            vars: {
-                foo: 'bar',
-                n: 10085
-            },
-            config: {
-                log: {
-                    start: {
-                        messages: [
-                            'log:xxx{foo}',
-                            'log:yyy{n}'
-                        ]
-                    }
+    describe("test getConfig", function() {
 
-                }
-            },
-            tasks: {
-                default: ['log:start']
-            }
+        it('should parse the string', function() {
+            var config = abc.getConfig('log', 'start');
+            config.should.eql({
+                message: "Welcom to xxx"
+            });
         });
 
+        it('should parse the template', function () {
+            var config = abc.getConfig('log', 'end');
+            config.should.eql({
+                message: "Welcom to bar"
+            })
+        });
 
+    });
+
+    describe("test get Queue", function() {
+
+        it('should get an Array', function(){
+            abc.getQueue('default').should.be.an.instanceOf(Array);
+        });
+
+        it('should get a Array with 2 element', function(){
+            abc.getQueue('default').should.have.length(2);
+        });
+
+        it('should be an array of Task', function(){
+            abc.getQueue('default').forEach(function(task){
+                task.should.be.an.instanceOf(Task);
+            });
+        });
+
+        it('should have public property type, name, and source', function(){
+            var startLog = abc.getQueue('default')[0];
+            startLog.should.have.property('type','log')
+            startLog.should.have.property('name','start')
+            startLog.should.have.property('source','log:start');
+            startLog.config().should.eql({
+                message: 'Welcom to xxx'
+            });
+
+            var endLog = abc.getQueue('default')[1];
+            endLog.should.have.property('type','log')
+            endLog.should.have.property('name','end')
+            endLog.should.have.property('source','log:end');
+            endLog.config().should.eql({
+                message: 'Welcom to bar'
+            });
+        });
     });
 });
