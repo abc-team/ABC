@@ -11,7 +11,8 @@
     "url": "git://github.com/abc-team/ABC.git"
   },
   "bin": {
-    "abcenter": "bin/abcenter"
+    "abcenter": "bin/abcenter",
+    "abc": "bin/abc"
   },
   "main": "lib/index.js",
   "scripts": {
