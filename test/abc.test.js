@@ -8,11 +8,11 @@ describe("ABC Test", function(){
     before(function(){
         abc = new ABC({
 
-            vars: {
+            _vars: {
                 foo: 'bar'
             },
 
-            configs: {
+            _configs: {
                 log: {
                     start: {
                         message: "Welcom to xxx"

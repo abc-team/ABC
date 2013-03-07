@@ -9,7 +9,7 @@
 
 ## 打包	
 ````
->abc build [taskfile[.taskname]]
+>abc run [taskfile[.taskname]]
 			//在当前目录执行打包，默认按abc.json打包，如果无abc.json，返回
 	 [taskfile] 
 			//指定打包配置文件名，按当前目录里的abc.[taskfile].json来打包，如无则返回

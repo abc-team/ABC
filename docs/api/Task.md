@@ -1,0 +1,8 @@
+- Class: Task
+    - task.type
+    - task.name
+    - task.source
+    - task.config(message)
+    - task.files()
+    - task.log(message)
+    - task.warning(message)
