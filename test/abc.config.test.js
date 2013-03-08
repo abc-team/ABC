@@ -80,20 +80,33 @@ describe('matcher test',function(){
 
 })
 
+describe('match 反向匹配',function(){
+
+  it('reverse match',function(){
+
+    Matcher.match('lib/foo/bar/*.js','lib/foo',true).should.be.true;
+    Matcher.match('lib/foo/bar/*.js','lib/bar',true).should.be.false;
+
+  })
+
+})
 
 
 describe('find file with wildcard',function(){
-  var found
-  beforeEach(function(done){
-    find('parse_config/src','*.js',function(list){
-      found = list
-      done()
-    })
-  })
 
-  it('*.js',function(){
-    found.should.eql(['a.js','b.js','c.js'])
-  })
+  // var found
+  // beforeEach(function(next){
+  //   find('parse_config/src','*.js',function(list){
+  //     found = list
+  //     next()
+  //   })
+  // })
+  // describe('#find',function(){
+  //   it('*.js',function(){
+  //     found.should.eql(['a.js','b.js','c.js'])
+  //   })
+  // })
+
 })
 
 
@@ -106,8 +119,10 @@ describe('find file with wildcard2',function(){
     })
   })
 
-  it('find two js file',function(){
-    found.should.eql(['a.js','b.js'])
+  describe('#find',function(){
+    it('find two js file',function(){
+      found.should.eql(['a.js','b.js'])
+    })
   })
 })
 
