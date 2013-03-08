@@ -33,6 +33,7 @@ describe("ABC Test", function(){
 
         it('should parse the string', function() {
             var config = abc.getConfig('log', 'start');
+
             config.should.eql({
                 message: "Welcom to xxx"
             });

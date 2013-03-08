@@ -1,4 +1,5 @@
 - Class: ABC
+    - ABC(json)
     - abc.utils
     - abc.pluginManager
     - abc.getConfig(type, name)

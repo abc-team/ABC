@@ -8,7 +8,11 @@ describe("PluginManager Test", function(){
         var pm;
         var abcObj = {};
         var initConfig = {};
-        var abc = new ABC({});
+        var abc = new ABC({
+            tasks: {
+                default: []
+            }
+        });
 
         var p1 = function(abc, initConfig) {
             abc.should.eql(abcObj, 'plugin abc param');
