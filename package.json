@@ -29,7 +29,9 @@
     "optimist": "~0.3.5",
     "mustache": "~0.7.2",
     "async": "~0.2.5",
-    "colors": "~0.6.0-1"
+    "colors": "~0.6.0-1",
+    "iconv-lite": "~0.2.7",
+    "mkdirp": "~0.3.5"
   },
   "devDependencies": {
     "mocha": "~1.8.1",
