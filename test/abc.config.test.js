@@ -3,7 +3,7 @@ var util = require('../lib/utils/config-util')
   , FilterList = require('../lib/utils/filter-list')
   , find = require('../lib/utils/find')
   , Matcher = require('../lib/utils/path-matcher')
-
+  , Path = require('path')
 
 require('should')
 
@@ -67,8 +67,6 @@ describe('matcher test',function(){
 
     Matcher.match('foo/**/bar/*.txt','foo/moo/goo/bar/myfile.txt').should.be.true;
     Matcher.match('foo.txt','bar/foo.txt').should.be.false;
-
-    // Matcher.match('','').should.be.true;
   })
 
   it('matches',function(){
@@ -80,21 +78,50 @@ describe('matcher test',function(){
 
 })
 
+describe('absolute path matcher test',function(){
+  it('#abs matche',function(){
+    var list = ['/*.js']
+    Matcher.match('/*.js','/foo.js').should.be.true;
+    Matcher.match('/var/www/f/dropbox/gits/abcenter/ABC/lib/utils/*.js','/var/www/f/dropbox/gits/abcenter/ABC/lib/utils/a.js').should.be.true;
+
+    Matcher.match('/var/www/f/**/abcenter/ABC/lib/utils/*.js','/var/www/f/dropbox/gits/abcenter/ABC/lib/utils/a.js').should.be.true;
+
+    Matcher.match('/var/www/f/*/*.js','/var/www/f/b/a.js').should.be.true;
+
+    Matcher.matches(['/var/www/f/dropbox/gits/abcenter/ABC/test/parse_config/src/a.js','/var/www/f/dropbox/gits/abcenter/ABC/test/parse_config/src/b.js'],'/var/www/f/dropbox/gits/abcenter/ABC/test/parse_config/src/c.js').should.be.false;
+
+    Matcher.matches([ '/var/www/f/dropbox/gits/abcenter/ABC/test/parse_config/**/a.js','/var/www/f/dropbox/gits/abcenter/ABC/test/parse_config/**/b.js' ],'/var/www/f/dropbox/gits/abcenter/ABC/test/parse_config/src/a.js').should.be.true;
+
+  })
+})
+
+
 describe('match 反向匹配',function(){
 
   it('reverse match',function(){
 
     Matcher.match('lib/foo/bar/*.js','lib/foo',true).should.be.true;
     Matcher.match('lib/foo/bar/*.js','lib/bar',true).should.be.false;
-
+    Matcher.matches([ '/var/www/f/dropbox/gits/abcenter/ABC/test/parse_config/**/a.js',
+  '/var/www/f/dropbox/gits/abcenter/ABC/test/parse_config/**/b.js'],'/var/www/f/dropbox/gits/abcenter/ABC/test/parse_config/src',true).should.be.true;
   })
 
 })
 
+describe('Node.js path.resolve test',function(){
+  it('#resolve',function(){
+    (Path.resolve('/a/b','../**/*.js')).should.eql('/a/**/*.js');
+  })
+})
+
 
 describe('find file with wildcard',function(){
+  return;
+  var root = process.cwd()
+    , p
+    , found
+  p = root + '/parse_config/src/'
 
-  var found
   before(function(next){
     find('parse_config/src','*.js',function(list){
       found = list
@@ -103,7 +130,7 @@ describe('find file with wildcard',function(){
   })
   describe('#find',function(){
     it('*.js',function(){
-      found.should.eql(['a.js','b.js','c.js'])
+      found.should.eql([p+'a.js',p+'b.js',p+'c.js'])
     })
   })
 
@@ -111,9 +138,13 @@ describe('find file with wildcard',function(){
 
 
 describe('find file with wildcard2',function(){
-  var found
+  var root = process.cwd()
+    , p
+    , found
+  p = root + '/parse_config/src/'
+
   before(function(done){
-    find('parse_config/src',['a.js','b.js'],function(list){
+    find('parse_config/**',['a.js','b.js'],function(list){
       found = list
       done()
     })
@@ -121,7 +152,7 @@ describe('find file with wildcard2',function(){
 
   describe('#find',function(){
     it('find two js file',function(){
-      found.should.eql(['a.js','b.js'])
+      found.should.eql([p+'a.js',p+'b.js'])
     })
   })
 })
