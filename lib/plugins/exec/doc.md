@@ -6,25 +6,24 @@
 ## 配置
 
 不指定平台
-````js
-{
-    command: "",
-    args: [],
-}
-````
+
+    {
+        command: "",
+        args: [],
+    }
+
 
 指定平台
-````js
-{
 
-    "win": {
-        "command": "",
-        "args": []
-    },
-
-    "unix": {
-        "command":"",
-        "args": []
+    {
+    
+        "win": {
+            "command": "",
+            "args": []
+        },
+    
+        "unix": {
+            "command":"",
+            "args": []
+        }
     }
-}
-````
