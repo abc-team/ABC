@@ -82,4 +82,10 @@ describe("ABC Test", function(){
             });
         });
     });
+
+    describe("test run", function() {
+        before(function(done){
+            abc.execQueue('default', done)
+        });
+    });
 });
