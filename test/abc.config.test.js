@@ -94,25 +94,25 @@ describe('match 反向匹配',function(){
 
 describe('find file with wildcard',function(){
 
-  // var found
-  // beforeEach(function(next){
-  //   find('parse_config/src','*.js',function(list){
-  //     found = list
-  //     next()
-  //   })
-  // })
-  // describe('#find',function(){
-  //   it('*.js',function(){
-  //     found.should.eql(['a.js','b.js','c.js'])
-  //   })
-  // })
+  var found
+  before(function(next){
+    find('parse_config/src','*.js',function(list){
+      found = list
+      next()
+    })
+  })
+  describe('#find',function(){
+    it('*.js',function(){
+      found.should.eql(['a.js','b.js','c.js'])
+    })
+  })
 
 })
 
 
 describe('find file with wildcard2',function(){
   var found
-  beforeEach(function(done){
+  before(function(done){
     find('parse_config/src',['a.js','b.js'],function(list){
       found = list
       done()
@@ -125,4 +125,3 @@ describe('find file with wildcard2',function(){
     })
   })
 })
-
