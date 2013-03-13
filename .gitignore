@@ -12,3 +12,5 @@ desktop.ini
 
 node_modules/
 jsmine/
+*.iml
+*.ipr
