@@ -25,6 +25,14 @@ describe('ABC config tool test',function(){
     (util.getRootFromString('/a/b/c')).should.eql('/a');
   })
 
+  it('getProperPath',function(){
+    util.getProperPath('var/www/f/dropbox/gits/abcenter/*/test').should.eql('var/www/f/dropbox/gits/abcenter')
+  })
+
+  it('getBeginPath',function(){
+    util.getBeginPath(['/var/www/f/dropbox/gits/abcenter/ABC/test/parse_config/**/a.js','/var/www/f/dropbox/gits/abcenter/*/test/**/a.js']).should.eql('/var/www/f/dropbox/gits/abcenter')
+  })
+
 })
 
 
