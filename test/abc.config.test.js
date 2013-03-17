@@ -70,18 +70,18 @@ describe('async test',function(done){
 
 describe('matcher test',function(){
   it('match',function(){
-    Matcher.match('*.txt','foo.txt').should.be.true;
+    !!(Matcher.match('*.txt','foo.txt')).should.be.true;
     Matcher.match('*.txt','foot.js').should.be.false;
 
-    Matcher.match('foo/**/bar/*.txt','foo/moo/goo/bar/myfile.txt').should.be.true;
+    !!(Matcher.match('foo/**/bar/*.txt','foo/moo/goo/bar/myfile.txt')).should.be.true;
     Matcher.match('foo.txt','bar/foo.txt').should.be.false;
   })
 
   it('matches',function(){
     var list = ['*.js', '!bin/*.js']
-    Matcher.matches(list,'foo.js').should.be.true;
-    Matcher.matches(list,'lib/foo.js').should.be.false;
-    Matcher.matches(list,'bin/foo.js').should.be.false;
+    !!(Matcher.matches(list,'foo.js')).should.eql('*.js')
+    !!(Matcher.matches(list,'lib/foo.js')).should.be.false;
+    !!(Matcher.matches(list,'bin/foo.js')).should.be.false;
   })
 
 })
@@ -89,16 +89,16 @@ describe('matcher test',function(){
 describe('absolute path matcher test',function(){
   it('#abs matche',function(){
     var list = ['/*.js']
-    Matcher.match('/*.js','/foo.js').should.be.true;
-    Matcher.match('/var/www/f/dropbox/gits/abcenter/ABC/lib/utils/*.js','/var/www/f/dropbox/gits/abcenter/ABC/lib/utils/a.js').should.be.true;
+    !!(Matcher.match('/*.js','/foo.js')).should.be.true;
+    !!(Matcher.match('/var/www/f/dropbox/gits/abcenter/ABC/lib/utils/*.js','/var/www/f/dropbox/gits/abcenter/ABC/lib/utils/a.js')).should.be.true;
 
-    Matcher.match('/var/www/f/**/abcenter/ABC/lib/utils/*.js','/var/www/f/dropbox/gits/abcenter/ABC/lib/utils/a.js').should.be.true;
+    !!(Matcher.match('/var/www/f/**/abcenter/ABC/lib/utils/*.js','/var/www/f/dropbox/gits/abcenter/ABC/lib/utils/a.js')).should.be.true;
 
-    Matcher.match('/var/www/f/*/*.js','/var/www/f/b/a.js').should.be.true;
+    !!(Matcher.match('/var/www/f/*/*.js','/var/www/f/b/a.js')).should.be.true;
 
     Matcher.matches(['/var/www/f/dropbox/gits/abcenter/ABC/test/parse_config/src/a.js','/var/www/f/dropbox/gits/abcenter/ABC/test/parse_config/src/b.js'],'/var/www/f/dropbox/gits/abcenter/ABC/test/parse_config/src/c.js').should.be.false;
 
-    Matcher.matches([ '/var/www/f/dropbox/gits/abcenter/ABC/test/parse_config/**/a.js','/var/www/f/dropbox/gits/abcenter/ABC/test/parse_config/**/b.js' ],'/var/www/f/dropbox/gits/abcenter/ABC/test/parse_config/src/a.js').should.be.true;
+    !!(Matcher.matches([ '/var/www/f/dropbox/gits/abcenter/ABC/test/parse_config/**/a.js','/var/www/f/dropbox/gits/abcenter/ABC/test/parse_config/**/b.js' ],'/var/www/f/dropbox/gits/abcenter/ABC/test/parse_config/src/a.js')).should.eql('/var/www/f/dropbox/gits/abcenter/ABC/test/parse_config/**/a.js')
 
   })
 })
@@ -107,11 +107,10 @@ describe('absolute path matcher test',function(){
 describe('match 反向匹配',function(){
 
   it('reverse match',function(){
-
     Matcher.match('lib/foo/bar/*.js','lib/foo',true).should.be.true;
     Matcher.match('lib/foo/bar/*.js','lib/bar',true).should.be.false;
     Matcher.matches([ '/var/www/f/dropbox/gits/abcenter/ABC/test/parse_config/**/a.js',
-  '/var/www/f/dropbox/gits/abcenter/ABC/test/parse_config/**/b.js'],'/var/www/f/dropbox/gits/abcenter/ABC/test/parse_config/src',true).should.be.true;
+  '/var/www/f/dropbox/gits/abcenter/ABC/test/parse_config/**/b.js'],'/var/www/f/dropbox/gits/abcenter/ABC/test/parse_config/src',true).should.eql('/var/www/f/dropbox/gits/abcenter/ABC/test/parse_config/**/a.js')
   })
 
 })
@@ -163,4 +162,18 @@ describe('find file with wildcard2',function(){
       found.should.eql([p+'a.js',p+'b.js'])
     })
   })
+})
+
+describe('makemoney ',function(){
+  it('#makeMoney',function(){
+    var mm = util.makeMoney
+    mm('/a/*/c/**/e.js','/a/b/c/dddd/fff/e.js').should.eql(["b", "dddd/fff"])
+    mm('/aaa/*/cccc/**/e.js','/aaa/b/cccc/dddd/fff/e.js').should.eql(["b", "dddd/fff"])
+
+    mm('**.js','/aaa/b/cccc/dddd/fff/e.js').should.eql(['/aaa/b/cccc/dddd/fff/e'])
+
+    mm('*.js','/aaa/b/cccc/dddd/fff/e.js').should.eql(['/aaa/b/cccc/dddd/fff/e'])
+
+  })
+
 })
